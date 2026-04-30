@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Travel Login Popup</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+overflow-x:hidden;
+background:#f4f4f4;
+}
+
+/* -------- LOGIN PAGE -------- */
+
+#loginPage{
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),
+url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+background-size:cover;
+background-position:center;
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.topnav{
+position:absolute;
+top:30px;
+left:50px;
+right:50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:white;
+}
+
+.topnav ul{
+display:flex;
+list-style:none;
+gap:30px;
+align-items:center;
+}
+
+.topnav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+.login-btn{
+padding:10px 28px;
+border:1px solid white;
+border-radius:30px;
+background:rgba(255,255,255,.3);
+backdrop-filter:blur(6px);
+color:white;
+cursor:pointer;
+}
+
+.hero{
+position:absolute;
+top:40%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+color:white;
+}
+
+.hero h1{
+font-size:60px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:24px;
+margin-bottom:30px;
+}
+
+.hero button{
+padding:14px 35px;
+border:none;
+background:#ff8da1;
+color:white;
+border-radius:30px;
+font-size:18px;
+cursor:pointer;
+}
+
+.login-box{
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:360px;
+padding:35px;
+background:rgba(255,192,203,.35);
+backdrop-filter:blur(15px);
+border-radius:20px;
+box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+
+.close{
+position:absolute;
+right:18px;
+top:15px;
+font-size:24px;
+cursor:pointer;
+}
+
+.login-box h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.input-box{
+margin-bottom:20px;
+}
+
+.input-box input{
+width:100%;
+border:none;
+background:transparent;
+outline:none;
+border-bottom:2px solid #444;
+padding:10px 0;
+}
+
+.options{
+display:flex;
+justify-content:space-between;
+font-size:14px;
+margin-bottom:20px;
+}
+
+.login-main-btn{
+width:100%;
+padding:12px;
+border:none;
+background:white;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* -------- WEBSITE AFTER LOGIN -------- */
+
+#website{
+display:none;
+background:#fff;
+min-height:100vh;
+}
+
+.top-strip{
+background:#f2f2f2;
+padding:10px;
+text-align:center;
+font-size:14px;
+}
+
+.main-nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 80px;
+}
+
+.brand{
+font-size:32px;
+font-weight:bold;
+color:#1690c8;
+}
+
+.main-nav ul{
+display:flex;
+list-style:none;
+gap:30px;
+}
+
+.main-nav a{
+text-decoration:none;
+color:#333;
+font-weight:bold;
+}
+
+.search-bar{
+width:70%;
+margin:20px auto;
+background:white;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+border-radius:40px;
+display:flex;
+overflow:hidden;
+}
+
+.search-bar input,
+.search-bar select{
+flex:1;
+padding:18px;
+border:none;
+outline:none;
+}
+
+.search-bar button{
+width:180px;
+border:none;
+background:#0d84b6;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+.hero-banner{
+width:70%;
+margin:30px auto;
+height:350px;
+background:
+linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),
+url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+background-size:cover;
+background-position:center;
+border-radius:14px;
+padding:60px;
+color:white;
+}
+
+.hero-banner h1{
+font-size:48px;
+margin-bottom:15px;
+}
+
+.hero-banner button{
+padding:12px 30px;
+background:white;
+color:#333;
+border:none;
+border-radius:30px;
+margin-top:20px;
+}
+
+.destinations{
+width:70%;
+margin:30px auto;
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.place-card{
+width:180px;
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,.2);
+}
+
+.place-card img{
+width:100%;
+height:120px;
+object-fit:cover;
+}
+
+.place-card h3{
+padding:15px;
+text-align:center;
+}
+
+.section-title{
+text-align:center;
+margin-top:50px;
+font-size:42px;
+color:#333;
+}
+
+.package-box{
+width:70%;
+margin:40px auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.tour-card{
+background:white;
+padding:20px;
+border-radius:14px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+text-align:center;
+}
+
+.tour-card h3{
+margin-bottom:15px;
+}
+
+.tour-card button{
+padding:10px 25px;
+background:#0d84b6;
+color:white;
+border:none;
+border-radius:30px;
+margin-top:15px;
+}
+
+.logout{
+display:block;
+width:180px;
+margin:40px auto;
+padding:12px;
+background:#004d4d;
+color:white;
+text-align:center;
+text-decoration:none;
+border-radius:30px;
+}
+</style>
+
+
+<script>
+function openLogin(){
+document.getElementById("popup").style.display="block";
+}
+
+function closeLogin(){
+document.getElementById("popup").style.display="none";
+}
+
+async function login(){
+
+var user=document.getElementById("username").value;
+var pass=document.getElementById("password").value;
+
+if(user==="admin" && pass==="1234"){
+
+// FIX: prevent crash if backend is not running
+try{
+await fetch("http://localhost:3000/login-history",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+username:user,
+status:"Success"
+})
+});
+}catch(err){
+console.log("Backend not running, skipping...");
+}
+
+// THIS WILL ALWAYS RUN NOW ✅
+document.getElementById("loginPage").style.display="none";
+document.getElementById("website").style.display="block";
+
+}
+else{
+
+try{
+await fetch("http://localhost:3000/login-history",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+username:user,
+status:"Failed"
+})
+});
+}catch(err){}
+
+alert("Invalid Login");
+
+}
+}
+
+function logout(){
+document.getElementById("website").style.display="none";
+document.getElementById("loginPage").style.display="flex";
+}
+
+
+function openBooking(place){
+document.getElementById("bookingPopup").style.display="block";
+document.getElementById("bdestination").value=place;
+}
+
+function closeBooking(){
+document.getElementById("bookingPopup").style.display="none";
+}
+
+async function submitBooking(){
+
+var name=document.getElementById("bname").value;
+var email=document.getElementById("bemail").value;
+var phone=document.getElementById("bphone").value;
+var destination=document.getElementById("bdestination").value;
+
+if(name==="" || email==="" || phone===""){
+alert("Please fill all details");
+return;
+}
+
+/* FIX START */
+try{
+
+await fetch("http://localhost:3000/book",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+name:name,
+email:email,
+phone:phone,
+destination:destination
+})
+});
+
+}catch(err){
+console.log("Backend not running, skipping...");
+}
+/* FIX END */
+
+/* THIS WILL ALWAYS RUN NOW */
+alert("✅ Booking Successful!");
+
+document.getElementById("bookingPopup").style.display="none";
+
+document.getElementById("bname").value="";
+document.getElementById("bemail").value="";
+document.getElementById("bphone").value="";
+}
+
+
+</script>
+
+</head>
+<body>
+
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage">
+
+<div class="topnav">
+<div class="logo"></div>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">Services</a></li>
+<li><a href="#">Contact</a></li>
+<li>
+<button class="login-btn" onclick="openLogin()">
+Login
+</button>
+</li>
+</ul>
+
+</div>
+
+
+<div class="hero">
+<h1>Explore The World With Us</h1>
+<p>Your Journey Begins Here</p>
+
+<button onclick="openLogin()">
+Start Your Adventure
+</button>
+</div>
+
+
+<div class="login-box" id="popup">
+
+<div class="close" onclick="closeLogin()">×</div>
+
+<h2>Login</h2>
+
+<div class="input-box">
+<input type="text" id="username" placeholder="Username">
+</div>
+
+<div class="input-box">
+<input type="password" id="password" placeholder="Password">
+</div>
+
+<div class="options">
+<label><input type="checkbox"> Remember me</label>
+<a href="#">Forgot Password?</a>
+</div>
+
+<button class="login-main-btn" onclick="login()">
+Log In
+</button>
+
+</div>
+
+</div>
+
+
+<!-- WEBSITE AFTER LOGIN -->
+
+<div id="website">
+
+<div class="top-strip">
+Shop 2,500 operators • 4.5 stars • 24/7 customer support
+</div>
+
+<div class="main-nav">
+<div class="brand">touradar</div>
+
+<ul>
+<li><a href="#">Destinations</a></li>
+<li><a href="#">Adventure Styles</a></li>
+<li><a href="#">Deals</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+</div>
+
+
+<div class="search-bar">
+<input placeholder="Where to?">
+<input placeholder="When?">
+
+<select>
+<option>All adventures</option>
+<option>Beach Tours</option>
+<option>Mountain Trips</option>
+</select>
+
+<button>Search</button>
+</div>
+
+
+<div class="hero-banner">
+<h1>Adventure Begins Here</h1>
+<p>Choose from thousands of organized adventures</p>
+
+<button>Check out deals</button>
+</div>
+
+
+<div class="destinations">
+
+<div class="place-card">
+<img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a">
+<h3>Europe</h3>
+</div>
+
+<div class="place-card">
+<img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325">
+<h3>Spain</h3>
+</div>
+
+<div class="place-card">
+<img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9">
+<h3>Italy</h3>
+</div>
+
+<div class="place-card">
+<img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989">
+<h3>Japan</h3>
+</div>
+
+<div class="place-card">
+<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb">
+<h3>Asia</h3>
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+Book The World’s Best Tours and River Cruises
+</h2>
+
+
+<div class="package-box">
+
+<div class="tour-card">
+<h3>Goa Beach Tour</h3>
+<p>3 Days • ₹12,000</p>
+<button onclick="openBooking('Goa Beach Tour')">Book Now</button>
+</div>
+
+<div class="tour-card">
+<h3>Manali Adventure</h3>
+<p>5 Days • ₹18,000</p>
+<button onclick="openBooking('Manali Adventure')">Book Now</button>
+</div>
+
+<div class="tour-card">
+<h3>Kerala Cruise</h3>
+<p>7 Days • ₹25,000</p>
+<button onclick="openBooking('Kerala Cruise')">Book Now</button>
+</div>
+
+</div>
+
+
+<a href="#" class="logout" onclick="logout()">
+Logout
+</a>
+
+</div>
+<div id="bookingPopup" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:30px;
+width:380px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+z-index:9999;
+">
+
+<h2 style="text-align:center;margin-bottom:20px;">
+Book Tour
+</h2>
+
+<div style="position:absolute;right:18px;top:12px;cursor:pointer;font-size:24px;"
+onclick="closeBooking()">×</div>
+
+<label>Name</label>
+<input id="bname" type="text" style="width:100%;padding:10px;margin:8px 0;">
+
+<label>Email</label>
+<input id="bemail" type="email" style="width:100%;padding:10px;margin:8px 0;">
+
+<label>Phone</label>
+<input id="bphone" type="text" style="width:100%;padding:10px;margin:8px 0;">
+
+<label>Destination</label>
+<input id="bdestination" readonly style="width:100%;padding:10px;margin:8px 0;">
+
+<button onclick="submitBooking()"
+style="
+width:100%;
+margin-top:18px;
+padding:12px;
+background:#0d84b6;
+color:white;
+border:none;
+border-radius:30px;">
+Confirm Booking
+</button>
+
+</div>
+
+</body>
+</html>

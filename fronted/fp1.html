@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Travel App</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+
+body{background:#f4f4f4}
+
+/* LOGIN PAGE */
+#loginPage{
+height:100vh;
+background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),
+url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+background-size:cover;
+display:flex;
+justify-content:center;
+align-items:center;
+position:relative;
+}
+
+/* NAV */
+.topnav{
+position:absolute;
+top:30px;
+left:50px;
+right:50px;
+display:flex;
+justify-content:space-between;
+}
+
+.topnav ul{display:flex;gap:30px;list-style:none;}
+.topnav a{color:white;text-decoration:none;font-weight:bold;}
+.topnav a:hover{color:#ff8da1}
+
+/* BUTTON HOVER */
+button{
+transition:0.3s;
+}
+button:hover{
+transform:scale(1.05);
+opacity:0.9;
+}
+
+/* LOGIN BUTTON */
+.login-btn{
+padding:10px 25px;
+border-radius:30px;
+background:rgba(255,255,255,.3);
+border:1px solid white;
+color:white;
+cursor:pointer;
+}
+.login-btn:hover{
+background:white;
+color:#333;
+}
+
+/* HERO */
+.hero{text-align:center;color:white;}
+.hero h1{font-size:50px;margin-bottom:10px;}
+.hero button{
+padding:12px 30px;
+background:#ff8da1;
+border:none;
+border-radius:30px;
+color:white;
+}
+.hero button:hover{
+background:#ff6f8a;
+}
+
+/* LOGIN BOX */
+.login-box{
+display:none;
+position:absolute;
+background:white;
+padding:30px;
+border-radius:15px;
+width:300px;
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+.login-box input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.login-main-btn{
+width:100%;
+padding:10px;
+background:#0d84b6;
+color:white;
+border:none;
+border-radius:25px;
+}
+.login-main-btn:hover{
+background:#086a91;
+}
+
+/* WEBSITE */
+#website{display:none;}
+
+.main-nav{
+display:flex;
+justify-content:space-between;
+padding:20px;
+background:white;
+}
+
+.main-nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+.main-nav a{
+text-decoration:none;
+color:#333;
+font-weight:bold;
+cursor:pointer;
+}
+.main-nav a:hover{
+color:#ff8da1;
+}
+
+/* SEARCH */
+.search-bar{
+display:flex;
+width:70%;
+margin:20px auto;
+border-radius:40px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,.2);
+}
+.search-bar input{flex:1;padding:12px;border:none;}
+.search-bar button{
+background:#0d84b6;
+color:white;
+border:none;
+padding:12px;
+}
+.search-bar button:hover{
+background:#086a91;
+}
+
+/* CARDS */
+.place-card{
+width:160px;
+background:white;
+padding:10px;
+margin:10px;
+text-align:center;
+border-radius:10px;
+transition:0.3s;
+}
+.place-card:hover{
+transform:translateY(-8px);
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+.destinations{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+/* TOUR */
+.tour-card{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+transition:0.3s;
+}
+.tour-card:hover{
+transform:scale(1.05);
+}
+
+/* BOOK BUTTON */
+.tour-card button{
+padding:10px 20px;
+border:none;
+background:#0d84b6;
+color:white;
+border-radius:25px;
+}
+.tour-card button:hover{
+background:#065f7f;
+}
+
+/* LOGOUT */
+.logout{
+display:block;
+margin:30px auto;
+padding:10px;
+background:black;
+color:white;
+text-align:center;
+width:150px;
+text-decoration:none;
+border-radius:20px;
+}
+.logout:hover{
+background:#333;
+}
+</style>
+
+<script>
+
+function openLogin(){
+document.getElementById("popup").style.display="block";
+}
+
+function login(){
+var user=document.getElementById("username").value;
+var pass=document.getElementById("password").value;
+
+if(user==="admin" && pass==="1234"){
+document.getElementById("loginPage").style.display="none";
+document.getElementById("website").style.display="block";
+}else{
+alert("Invalid Login");
+}
+}
+
+function logout(){
+document.getElementById("website").style.display="none";
+document.getElementById("loginPage").style.display="flex";
+}
+
+/* BOOKING */
+function openBooking(place){
+document.getElementById("bookingPopup").style.display="block";
+document.getElementById("bdestination").value=place;
+}
+
+function closeBooking(){
+document.getElementById("bookingPopup").style.display="none";
+}
+
+function submitBooking(){
+
+var name=document.getElementById("bname").value;
+var email=document.getElementById("bemail").value;
+var phone=document.getElementById("bphone").value;
+
+if(name===""||email===""||phone===""){
+alert("Please fill all details");
+return;
+}
+
+/* POPUP MESSAGE */
+alert("🎉 Booking Successful!\n\nThank you " + name + " 😊");
+
+/* RESET */
+document.getElementById("bookingPopup").style.display="none";
+document.getElementById("bname").value="";
+document.getElementById("bemail").value="";
+document.getElementById("bphone").value="";
+}
+
+</script>
+
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage">
+
+<div class="topnav">
+<ul>
+<li><button class="login-btn" onclick="openLogin()">Login</button></li>
+</ul>
+</div>
+
+<div class="hero">
+<h1>Explore The World</h1>
+<button onclick="openLogin()">Start Journey</button>
+</div>
+
+<div class="login-box" id="popup">
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+<button class="login-main-btn" onclick="login()">Login</button>
+</div>
+
+</div>
+
+<!-- WEBSITE -->
+<div id="website">
+
+<div class="main-nav">
+<h2>Tour App</h2>
+</div>
+
+<div class="destinations">
+<div class="place-card">Goa</div>
+<div class="place-card">Manali</div>
+<div class="place-card">Kerala</div>
+</div>
+
+<div style="display:flex;justify-content:center;gap:20px;">
+<div class="tour-card">
+<h3>Goa Tour</h3>
+<button onclick="openBooking('Goa')">Book Now</button>
+</div>
+
+<div class="tour-card">
+<h3>Manali Tour</h3>
+<button onclick="openBooking('Manali')">Book Now</button>
+</div>
+</div>
+
+<a href="#" class="logout" onclick="logout()">Logout</a>
+
+</div>
+
+<!-- BOOKING POPUP -->
+<div id="bookingPopup" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:25px;
+border-radius:10px;
+">
+
+<h3>Book Tour</h3>
+
+<input id="bname" placeholder="Name"><br><br>
+<input id="bemail" placeholder="Email"><br><br>
+<input id="bphone" placeholder="Phone"><br><br>
+<input id="bdestination" readonly><br><br>
+
+<button onclick="submitBooking()">Confirm Booking</button>
+<button onclick="closeBooking()">Cancel</button>
+
+</div>
+
+</body>
+</html>
